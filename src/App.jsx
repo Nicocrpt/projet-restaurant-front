@@ -1,5 +1,7 @@
 import React from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Menu from './pages/Menu.jsx';
 import Login from './pages/Login.jsx';
@@ -12,24 +14,7 @@ function App() {
   return (
     <div className="app-wrapper">
       {/* Navigation Header */}
-      <header className="main-header">
-        <div className="header-container">
-          <Link to="/" className="logo-brand">
-            <span className="logo-icon">✨</span>
-            <span className="logo-text">L'Étoile Dorée</span>
-          </Link>
-          <nav className="nav-menu">
-            <Link to="/" className="nav-link">Accueil</Link>
-            <Link to="/menu" className="nav-link">La Carte</Link>
-            <Link to="/my-reservations" className="nav-link">Mes Réservations</Link>
-            <Link to="/reservations" className="nav-link admin-link">Admin</Link>
-          </nav>
-          <div className="auth-buttons">
-            <Link to="/login" className="btn btn-outline">Connexion</Link>
-            <Link to="/signup" className="btn btn-primary btn-sm">S'inscrire</Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content Area */}
       <main className="main-content">
@@ -45,15 +30,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="main-footer">
-        <div className="footer-container">
-          <p className="copyright">&copy; {new Date().getFullYear()} L'Étoile Dorée. Tous droits réservés.</p>
-          <div className="footer-links">
-            <a href="#privacy">Mentions Légales</a>
-            <a href="#terms">CGU</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

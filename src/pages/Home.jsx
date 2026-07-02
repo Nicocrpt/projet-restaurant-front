@@ -1,28 +1,43 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Hero from '../components/Hero.jsx';
+import FeatureCard from '../components/FeatureCard.jsx';
 
 function Home() {
+  const features = [
+    {
+      icon: "✨",
+      title: "Cuisine Raffinée",
+      description: "Des plats d'exception préparés avec rigueur et créativité par notre brigade."
+    },
+    {
+      icon: "🌿",
+      title: "Produits Locaux",
+      description: "Une sélection rigoureuse d'ingrédients de saison en circuit court."
+    },
+    {
+      icon: "🍷",
+      title: "Cave d'Exception",
+      description: "Des accords mets-vins méticuleusement sélectionnés pour parfaire votre repas."
+    },
+    {
+      icon: "🕯️",
+      title: "Ambiance Cosy",
+      description: "Un cadre chaleureux et intime pour savourer chaque moment."
+    }
+  ];
+
   return (
     <div className="home-container">
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <span className="hero-tagline">Haute Gastronomie</span>
-          <h1 className="hero-title">L'Étoile Dorée</h1>
-          <p className="hero-subtitle">
-            Une table d'exception alliant tradition culinaire française et créativité moderne.
-          </p>
-          <div className="hero-actions">
-            <Link to="/menu" className="btn btn-primary">
-              Découvrir la Carte
-            </Link>
-            <Link to="/my-reservations" className="btn btn-secondary">
-              Réserver une Table
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero 
+        tagline="Haute Gastronomie"
+        title="L'Étoile Dorée"
+        subtitle="Une table d'exception alliant tradition culinaire française et créativité moderne."
+        primaryText="Découvrir la Carte"
+        primaryLink="/menu"
+        secondaryText="Réserver une Table"
+        secondaryLink="/my-reservations"
+      />
 
       {/* Philosophy / Story Section */}
       <section className="story-section">
@@ -41,26 +56,14 @@ function Home() {
             </div>
             
             <div className="features-grid">
-              <div className="feature-card">
-                <div className="feature-icon">✨</div>
-                <h3>Cuisine Raffinée</h3>
-                <p>Des plats d'exception préparés avec rigueur et créativité par notre brigade.</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">🌿</div>
-                <h3>Produits Locaux</h3>
-                <p>Une sélection rigoureuse d'ingrédients de saison en circuit court.</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">🍷</div>
-                <h3>Cave d'Exception</h3>
-                <p>Des accords mets-vins méticuleusement sélectionnés pour parfaire votre repas.</p>
-              </div>
-              <div className="feature-card">
-                <div className="feature-icon">🕯️</div>
-                <h3>Ambiance Cosy</h3>
-                <p>Un cadre chaleureux et intime pour savourer chaque moment.</p>
-              </div>
+              {features.map((feature, index) => (
+                <FeatureCard 
+                  key={index}
+                  icon={feature.icon}
+                  title={feature.title}
+                  description={feature.description}
+                />
+              ))}
             </div>
           </div>
         </div>
