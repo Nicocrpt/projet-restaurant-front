@@ -6,7 +6,6 @@ function Menu() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Filter states
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [maxPrice, setMaxPrice] = useState(50); // Default max price in Euros
 
@@ -16,13 +15,11 @@ function Menu() {
         setIsLoading(true);
         setError(null);
 
-        // Build query string based on active filters
         const params = new URLSearchParams();
         if (categoryFilter !== 'all') {
           params.append('category', categoryFilter);
         }
         if (maxPrice < 50) {
-          // Convert price to cents for the backend
           params.append('max-price', (maxPrice * 100).toString());
         }
 
@@ -36,9 +33,7 @@ function Menu() {
 
         const data = await response.json();
         
-        // Handle different possible backend response formats
         if (Array.isArray(data)) {
-          // If the backend returns a flat array, we group it by category ourselves
           const grouped = data.reduce((acc, item) => {
             const cat = item.category || 'autres';
             if (!acc[cat]) acc[cat] = [];
@@ -47,7 +42,6 @@ function Menu() {
           }, {});
           setMenuData(grouped);
         } else {
-          // If the backend returns grouped categories (e.g. { entree: [], plat: [] })
           setMenuData(data);
         }
       } catch (err) {
@@ -60,7 +54,6 @@ function Menu() {
     fetchMenu();
   }, [categoryFilter, maxPrice]);
 
-  // Translate category keys to user-friendly titles
   const categoryTitles = {
     entree: 'Entrées',
     plat: 'Plats Principaux',

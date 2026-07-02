@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FeatureCard from '../components/FeatureCard.jsx';
 import Horaires from '../components/Horaires.jsx';
+import Hero from '../components/Hero.jsx';
 
 function Home() {
   const features = [
