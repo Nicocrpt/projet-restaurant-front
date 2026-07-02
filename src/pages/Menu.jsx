@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Categorie from '../components/Categorie.jsx';
+import MenuFilters from '../components/MenuFilters.jsx';
 
 function Menu() {
   const [menuData, setMenuData] = useState({});
@@ -7,10 +8,75 @@ function Menu() {
   const [error, setError] = useState(null);
 
   const [categoryFilter, setCategoryFilter] = useState('all');
-  const [maxPrice, setMaxPrice] = useState(50); // Default max price in Euros
+  const [absoluteMaxPrice, setAbsoluteMaxPrice] = useState(50);
+
+  const [maxPrice, setMaxPrice] = useState(50);
+
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    async function fetchMenu() {
+    async function loadInitialMenu() {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await fetch('/api/menu');
+        if (!response.ok) {
+          throw new Error("Impossible de récupérer la carte du restaurant.");
+        }
+
+        const data = await response.json();
+        
+        let maxCents = 0;
+        const processItems = (items) => {
+          items.forEach(item => {
+            if (item.price_cents > maxCents) {
+              maxCents = item.price_cents;
+            }
+          });
+        };
+
+        let groupedData = {};
+        if (Array.isArray(data)) {
+          processItems(data);
+          groupedData = data.reduce((acc, item) => {
+            const cat = item.category || 'autres';
+            if (!acc[cat]) acc[cat] = [];
+            acc[cat].push(item);
+            return acc;
+          }, {});
+        } else {
+          groupedData = data;
+          Object.values(data).forEach(categoryItems => {
+            if (Array.isArray(categoryItems)) {
+              processItems(categoryItems);
+            }
+          });
+        }
+
+        // Set the dynamic slider range
+        if (maxCents > 0) {
+          const maxEuros = Math.ceil(maxCents / 100);
+          setAbsoluteMaxPrice(maxEuros);
+          setMaxPrice(maxEuros);
+        }
+        
+        setMenuData(groupedData);
+        setIsInitialLoad(false);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadInitialMenu();
+  }, []);
+
+  useEffect(() => {
+    if (isInitialLoad) return;
+
+    async function fetchFilteredMenu() {
       try {
         setIsLoading(true);
         setError(null);
@@ -19,7 +85,7 @@ function Menu() {
         if (categoryFilter !== 'all') {
           params.append('category', categoryFilter);
         }
-        if (maxPrice < 50) {
+        if (maxPrice < absoluteMaxPrice) {
           params.append('max-price', (maxPrice * 100).toString());
         }
 
@@ -51,8 +117,8 @@ function Menu() {
       }
     }
 
-    fetchMenu();
-  }, [categoryFilter, maxPrice]);
+    fetchFilteredMenu();
+  }, [categoryFilter, maxPrice, isInitialLoad, absoluteMaxPrice]);
 
   const categoryTitles = {
     entree: 'Entrées',
@@ -63,7 +129,7 @@ function Menu() {
 
   const handleResetFilters = () => {
     setCategoryFilter('all');
-    setMaxPrice(50);
+    setMaxPrice(absoluteMaxPrice);
   };
 
   return (
@@ -78,64 +144,15 @@ function Menu() {
       </section>
 
       <div className="menu-content-container">
-        {/* Filters Sidebar/Panel */}
-        <section className="filters-panel">
-          <div className="filter-group">
-            <h4 className="filter-title">Catégories</h4>
-            <div className="category-buttons">
-              <button
-                className={`filter-btn ${categoryFilter === 'all' ? 'active' : ''}`}
-                onClick={() => setCategoryFilter('all')}
-              >
-                Tout le menu
-              </button>
-              <button
-                className={`filter-btn ${categoryFilter === 'entree' ? 'active' : ''}`}
-                onClick={() => setCategoryFilter('entree')}
-              >
-                Entrées
-              </button>
-              <button
-                className={`filter-btn ${categoryFilter === 'plat' ? 'active' : ''}`}
-                onClick={() => setCategoryFilter('plat')}
-              >
-                Plats
-              </button>
-              <button
-                className={`filter-btn ${categoryFilter === 'dessert' ? 'active' : ''}`}
-                onClick={() => setCategoryFilter('dessert')}
-              >
-                Desserts
-              </button>
-            </div>
-          </div>
-
-          <div className="filter-group">
-            <div className="price-filter-header">
-              <h4 className="filter-title">Budget maximum</h4>
-              <span className="price-value">{maxPrice} €</span>
-            </div>
-            <input
-              type="range"
-              min="5"
-              max="50"
-              step="1"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="price-slider"
-            />
-            <div className="slider-labels">
-              <span>5 €</span>
-              <span>50 €</span>
-            </div>
-          </div>
-
-          {(categoryFilter !== 'all' || maxPrice < 50) && (
-            <button className="btn btn-outline btn-sm reset-btn" onClick={handleResetFilters}>
-              Réinitialiser les filtres
-            </button>
-          )}
-        </section>
+        {/* Reusable Filters Component */}
+        <MenuFilters
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          absoluteMaxPrice={absoluteMaxPrice}
+          handleResetFilters={handleResetFilters}
+        />
 
         {/* Menu Listings */}
         <div className="menu-list-wrapper">
@@ -148,8 +165,8 @@ function Menu() {
             <div className="error-state">
               <span className="error-icon">⚠️</span>
               <p className="error-message">{error}</p>
-              <button className="btn btn-primary btn-sm" onClick={() => setCategoryFilter('all')}>
-                Rafraîchir
+              <button className="btn btn-primary btn-sm" onClick={handleResetFilters}>
+                Réinitialiser
               </button>
             </div>
           ) : Object.keys(menuData).length === 0 || Object.values(menuData).every(arr => arr.length === 0) ? (
