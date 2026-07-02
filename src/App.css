@@ -317,6 +317,13 @@
   font-weight: 700;
 }
 
+.week-range {
+  font-size: 13px;
+  color: var(--accent);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
 .hours-list {
   list-style: none;
   display: flex;
@@ -327,6 +334,7 @@
 .hours-list li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px dashed var(--border-color);
   padding-bottom: 8px;
 }
@@ -335,6 +343,37 @@
   border-bottom: none;
   padding-bottom: 0;
 }
+
+.hours-list li.today {
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom: 1px solid var(--accent);
+}
+
+.day-date {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.hours-list li.today .day-date {
+  color: var(--accent-hover);
+  opacity: 0.8;
+}
+
+.today-badge {
+  background-color: var(--accent);
+  color: #000;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 
 .day {
   font-weight: 600;
