@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FeatureCard from '../components/FeatureCard.jsx';
 import Horaires from '../components/Horaires.jsx';
+import Hero from '../components/Hero.jsx';
 
 function Home() {
   const features = [
@@ -30,24 +31,15 @@ function Home() {
   return (
     <div className="home-container">
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <span className="hero-tagline">Haute Gastronomie</span>
-          <h1 className="hero-title">L'Étoile Dorée</h1>
-          <p className="hero-subtitle">
-            Une table d'exception alliant tradition culinaire française et créativité moderne.
-          </p>
-          <div className="hero-actions">
-            <Link to="/menu" className="btn btn-primary">
-              Découvrir la Carte
-            </Link>
-            <Link to="/my-reservations" className="btn btn-secondary">
-              Réserver une Table
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero 
+        tagline="Haute Gastronomie"
+        title="L'Étoile Dorée"
+        subtitle="Une table d'exception alliant tradition culinaire française et créativité moderne."
+        primaryText="Découvrir la Carte"
+        primaryLink="/menu"
+        secondaryText="Réserver une Table"
+        secondaryLink="/my-reservations"
+      />
 
       {/* Philosophy / Story Section */}
       <section className="story-section">
