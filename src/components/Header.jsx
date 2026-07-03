@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function Header() {
+  const { isAuthenticated, isAdmin, user, logout } = useAuth();
+
   return (
     <header className="main-header">
       <div className="header-container">
@@ -12,12 +15,27 @@ function Header() {
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Accueil</Link>
           <Link to="/menu" className="nav-link">La Carte</Link>
-          <Link to="/my-reservations" className="nav-link">Mes Réservations</Link>
-          <Link to="/reservations" className="nav-link admin-link">Admin</Link>
+          {isAuthenticated && (
+            <Link to="/my-reservations" className="nav-link">Mes Réservations</Link>
+          )}
+          {isAuthenticated && isAdmin && (
+            <Link to="/reservations" className="nav-link admin-link">Admin</Link>
+          )}
         </nav>
         <div className="auth-buttons">
-          <Link to="/login" className="btn btn-outline">Connexion</Link>
-          <Link to="/signup" className="btn btn-primary btn-sm">S'inscrire</Link>
+          {isAuthenticated ? (
+            <>
+              <span className="user-email-display">{user?.email}</span>
+              <button onClick={logout} className="btn btn-outline btn-sm">
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn btn-outline">Connexion</Link>
+              <Link to="/signup" className="btn btn-primary btn-sm">S'inscrire</Link>
+            </>
+          )}
         </div>
       </div>
     </header>
