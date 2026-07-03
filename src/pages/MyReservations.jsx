@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReservationCard from '../components/ReservationCard.jsx';
 import EditReservationModal from '../components/EditReservationModal.jsx';
+import './MyReservations.css';
 
 function MyReservations() {
   const navigate = useNavigate();
@@ -78,39 +79,40 @@ function MyReservations() {
   };
 
   const handleUpdateReservation = async (updatedData) => {
-    try {
-      const response = await fetch(
-        `/api/reservations/${selectedReservation.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(updatedData)
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Erreur lors de la mise à jour");
+    const response = await fetch(
+      `/api/reservations/${selectedReservation.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
       }
+    );
 
-      // ✅ IMPORTANT: utiliser la réponse backend
-      setReservations(prev =>
-        prev.map(res =>
-          res.id === data.id
-            ? data
-            : res
-        )
-      );
+    const data = await response.json();
 
-      setSelectedReservation(null);
-
-    } catch (err) {
-      alert(err.message);
+    if (!response.ok) {
+      throw new Error(data.error || "Impossible de mettre à jour la réservation.");
     }
+
+    // Reconstruction locale de la réservation avec les nouvelles données
+    const updatedReservation = {
+      ...selectedReservation,
+      number_of_people: updatedData.number_of_people,
+      starts_at: `${updatedData.date} ${updatedData.time}:00`, // Format YYYY-MM-DD HH:MM:SS requis par la carte
+      comment: updatedData.comment
+    };
+
+    // Mise à jour de l'état local pour rafraîchir la carte immédiatement
+    setReservations(prev =>
+      prev.map(res =>
+        res.id === selectedReservation.id
+          ? updatedReservation
+          : res
+      )
+    );
   };
 
   if (!token) {

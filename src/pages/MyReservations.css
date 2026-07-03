@@ -1,0 +1,368 @@
+/* ==========================================
+   Page : Mes Réservations & Modale d'Édition
+   Style aligné avec l'identité de l'Accueil (Moya)
+   ========================================== */
+
+.reservations-page {
+  animation: fadeIn 0.8s ease-out;
+  /* Hérite du fond de page global crème #fffaf3 */
+}
+
+/* Bannière de la page avec fond d'écran sombre pour intégrer l'en-tête absolu */
+.reservations-banner {
+  position: relative;
+  padding: 160px 20px 80px; /* Padding haut augmenté pour décaler sous l'en-tête absolu */
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/restaurant.jpg');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.banner-tagline {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #b08d57; /* Doré signature */
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.banner-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #ffffff; /* Blanc pour lisibilité sur fond sombre */
+  margin-bottom: 10px;
+}
+
+.banner-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #dddddd; /* Gris clair pour lisibilité */
+  max-width: 600px;
+  margin: 0 auto 15px;
+}
+
+.banner-action {
+  margin-top: 16px;
+}
+
+/* Grille de contenu */
+.reservations-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: 60px auto 100px;
+}
+
+.reservations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+/* Cartes de réservation */
+.reservation-card {
+  background-color: #ffffff;
+  border: 1px solid #e7e2db;
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.reservation-card:hover {
+  border-color: #b08d57;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(176, 141, 87, 0.08);
+}
+
+.res-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #e7e2db;
+  padding-bottom: 15px;
+}
+
+.res-id {
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.res-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.res-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.res-icon {
+  font-size: 18px;
+  color: #b08d57;
+}
+
+.res-value {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.res-comment {
+  background-color: #f8f6f2;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  border: 1px solid #e7e2db;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Actions de la carte */
+.res-card-footer {
+  border-top: 1px solid #e7e2db;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.res-card-footer .btn-cancel {
+  border-color: #d9455f !important;
+  color: #d9455f !important;
+  background-color: transparent !important;
+}
+
+.res-card-footer .btn-cancel:hover {
+  background-color: rgba(217, 69, 95, 0.05) !important;
+  color: #c83b54 !important;
+}
+
+/* Modale d'Édition (Glassmorphism & animations) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(34, 30, 26, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  animation: fadeInOverlay 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  padding: 20px;
+}
+
+.modal {
+  background-color: #f8f6f2;
+  border: 1px solid #e7e2db;
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 
+    0 24px 48px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(176, 141, 87, 0.08);
+  position: relative;
+  animation: slideUpModal 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  color: #888;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: rgba(176, 141, 87, 0.1);
+  color: #b08d57;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  margin-bottom: 30px;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+/* Boutons dans la modale */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  border-top: 1px solid #e7e2db;
+  padding-top: 20px;
+}
+
+.modal-actions button {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Spinner de chargement */
+.btn-loading-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s infinite linear;
+}
+
+/* Style du formulaire d'édition (dans la modale) */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  background-color: #f8f6f2;
+  border: 1px solid #e7e2db;
+  color: #333;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+  border-color: #b08d57;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+}
+
+.input-number-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-number-wrapper input {
+  width: 100%;
+  padding-right: 100px;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 16px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .modal {
+    padding: 30px 20px;
+    border-radius: 16px;
+  }
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+  .modal-actions button {
+    width: 100%;
+  }
+}

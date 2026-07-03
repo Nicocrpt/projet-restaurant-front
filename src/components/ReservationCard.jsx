@@ -3,6 +3,7 @@ import StatusBadge from './StatusBadge.jsx';
 
 function ReservationCard({ res, onCancel, onEdit }) {
   const isEditable = res.status === 'pending';
+  const isCancelable = res.status != 'cancelled';
 
   const formatReservationDate = (dateStr) => {
     try {
@@ -47,18 +48,24 @@ function ReservationCard({ res, onCancel, onEdit }) {
       </div>
 
       
-        <div className="res-card-footer">
+        <div className="res-card-footer" style={{ gap: '10px' }}>
           {isEditable && (
-            <button onClick={() => onEdit(res)}>
+            <button 
+              onClick={() => onEdit(res)}
+              className="btn btn-outline btn-sm"
+              style={{ marginRight: 'auto' }}
+            >
               Modifier
             </button>
           )}
-          <button 
-            onClick={() => onCancel(res.id)}
-            className="btn btn-secondary btn-sm btn-cancel"
-          >
-            Annuler la réservation
-          </button>
+          {isCancelable && (
+            <button 
+              onClick={() => onCancel(res.id)}
+              className="btn btn-secondary btn-sm btn-cancel"
+            >
+              Annuler
+            </button>
+          )}
         </div>
     </article>
   );

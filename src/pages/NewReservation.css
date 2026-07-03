@@ -1,0 +1,198 @@
+/* ==========================================
+   Page : Nouvelle Réservation (Formulaire)
+   Style aligné avec l'identité de l'Accueil (Moya)
+   ========================================== */
+
+.reservation-form-container {
+  animation: fadeIn 0.8s ease-out;
+  /* Hérite du fond de page global crème #fffaf3 */
+}
+
+/* Bannière de la page avec fond d'écran sombre pour intégrer l'en-tête absolu */
+.form-banner {
+  position: relative;
+  padding: 160px 20px 80px; /* Décale le titre sous le header absolu */
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/restaurant.jpg');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.form-banner .banner-tagline {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #b08d57; /* Doré signature */
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-banner .banner-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: #ffffff; /* Blanc pour lisibilité sur fond sombre */
+  margin-bottom: 10px;
+}
+
+/* Enveloppe de la carte de formulaire */
+.form-card-wrapper {
+  width: 90%;
+  max-width: 600px;
+  margin: 60px auto 100px;
+}
+
+.form-card {
+  background-color: #ffffff; /* Fond blanc pur assorti aux cartes */
+  border: 1px solid #e7e2db; /* Bordure fine grise-beige */
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03); /* Ombre douce */
+}
+
+.btn-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.btn-back:hover {
+  color: #b08d57; /* Doré au survol */
+}
+
+/* Style du formulaire */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  background-color: #f8f6f2; /* Fond blanc-gris chaud */
+  border: 1px solid #e7e2db;
+  color: #333;
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+  border-color: #b08d57; /* Focus doré */
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+}
+
+/* Alignement spécifique du champ nombre de convives */
+.input-number-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-number-wrapper input {
+  width: 100%;
+  padding-right: 100px;
+}
+
+.input-suffix {
+  position: absolute;
+  right: 16px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 10px;
+  padding: 16px 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Messages d'erreur */
+.error-alert {
+  background-color: rgba(217, 69, 95, 0.08);
+  border: 1px solid rgba(217, 69, 95, 0.2);
+  color: #d9455f;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.error-alert-icon {
+  font-size: 18px;
+}
+
+/* Succès */
+.success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  gap: 16px;
+}
+
+.success-icon {
+  font-size: 48px;
+}
+
+.success-state h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.8rem;
+  color: #b08d57;
+  font-weight: 500;
+}
+
+.success-state p {
+  color: #555;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .form-card {
+    padding: 30px 20px;
+  }
+  .form-banner .banner-title {
+    font-size: 2.2rem;
+  }
+}
