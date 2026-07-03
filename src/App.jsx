@@ -14,10 +14,7 @@ import './App.css';
 function App() {
   return (
     <div className="app-wrapper">
-      {/* Navigation Header */}
       <Header />
-
-      {/* Main Content Area */}
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -30,8 +27,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-
-      {/* Footer */}
       <Footer />
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-
+import restaurantImg from '../assets/restaurant.jpg';
+import './Signup.css';
 function Signup() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -68,101 +69,53 @@ function Signup() {
   };
 
   return (
-    <div className="auth-container-page">
-      <div className="auth-card">
-        <h2 className="auth-title">Créer un compte</h2>
-        <p className="auth-subtitle">Inscrivez-vous pour réserver une table en quelques secondes.</p>
+      <div className="auth-page">
+      <div className="auth-left">
+        <div className="auth-box">
 
-        {error && (
-          <div className="error-alert">
-            <span className="error-alert-icon">⚠️</span>
-            <p>{error}</p>
-          </div>
-        )}
+          <span className="auth-tag">Rejoignez-nous</span>
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="firstname">Prénom</label>
-              <input
-                type="text"
-                id="firstname"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                required
-                placeholder="Jean"
-              />
+          <h1 className="auth-title">
+            Créer un compte
+          </h1>
+
+          <p className="auth-subtitle">
+            Réservez votre table en quelques secondes
+          </p>
+
+          <form className="auth-form">
+
+            <div className="form-row">
+              <input type="text" placeholder="Prénom" />
+              <input type="text" placeholder="Nom" />
             </div>
-            <div className="form-group">
-              <label htmlFor="lastname">Nom</label>
-              <input
-                type="text"
-                id="lastname"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                required
-                placeholder="Dupont"
-              />
-            </div>
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="email">Adresse Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="jean.dupont@email.com"
-            />
-          </div>
+            <input type="email" placeholder="Adresse email" />
 
-          <div className="form-group">
-            <label htmlFor="phone">Numéro de Téléphone (optionnel)</label>
-            <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="0600000000"
-            />
-          </div>
+            <input type="tel" placeholder="Téléphone (optionnel)" />
 
-          <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
+            <input type="password" placeholder="Mot de passe" />
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
+            <input type="password" placeholder="Confirmer le mot de passe" />
 
-          <button type="submit" className="btn btn-primary btn-submit-auth" disabled={isLoading}>
-            {isLoading ? "Inscription en cours..." : "S'inscrire"}
-          </button>
-        </form>
+            <button type="submit">
+              S'inscrire
+            </button>
 
-        <p className="auth-footer-text">
-          Déjà un compte ? <Link to="/login">Se connecter</Link>
-        </p>
+          </form>
+
+          <p className="auth-footer">
+            Déjà un compte ? <Link to="/login">Se connecter</Link>
+          </p>
+
+        </div>
       </div>
-    </div>
+
+      <div
+        className="auth-right"
+        style={{ backgroundImage: `url(${restaurantImg})` }}
+      ></div>
+      </div>
   );
 }
 

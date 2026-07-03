@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-
+import restaurantImg from '../assets/restaurant.jpg';
+import './Login.css';
 function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -47,52 +48,52 @@ function Login() {
   };
 
   return (
-    <div className="auth-container-page">
-      <div className="auth-card">
-        <h2 className="auth-title">Connexion</h2>
-        <p className="auth-subtitle">Accédez à votre espace pour gérer vos réservations.</p>
+   <div className="login-page">
+      <div className="login-left">
+        <div className="login-box">
 
-        {error && (
-          <div className="error-alert">
-            <span className="error-alert-icon">⚠️</span>
-            <p>{error}</p>
-          </div>
-        )}
+          <span className="login-tag">Bienvenue</span>
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="email">Adresse Email</label>
+          <h1 className="login-title">
+            Connexion
+          </h1>
+
+          <p className="login-subtitle">
+            Accédez à votre expérience gastronomique
+          </p>
+
+          <form className="login-form">
             <input
               type="email"
-              id="email"
+              placeholder="Adresse email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="jean@example.com"
             />
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
             <input
               type="password"
-              id="password"
+              placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
             />
-          </div>
 
-          <button type="submit" className="btn btn-primary btn-submit-auth" disabled={isLoading}>
-            {isLoading ? "Connexion en cours..." : "Se connecter"}
-          </button>
-        </form>
+            <button type="submit">
+              Se connecter
+            </button>
+          </form>
 
-        <p className="auth-footer-text">
-          Pas encore de compte ? <Link to="/signup">S'inscrire</Link>
-        </p>
+          <p className="login-footer">
+            Pas de compte ? <Link to="/signup">S’inscrire</Link>
+          </p>
+
+        </div>
       </div>
+      <div
+        className="login-right"
+        style={{ backgroundImage: `url(${restaurantImg})` }}
+      >
+      </div>
+
     </div>
   );
 }
