@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -42,7 +42,6 @@ function NewReservation() {
       return;
     }
 
-    // Combine phone number with comment to save it without modifying the backend DB schema
     const combinedComment = phone 
       ? `Tél : ${phone}${comment ? ` | ${comment}` : ''}` 
       : comment;
@@ -79,29 +78,14 @@ function NewReservation() {
     }
   };
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
   if (!isAuthenticated) {
-    return (
-      <div className="reservation-form-container">
-        <div className="form-banner">
-          <span className="banner-tagline">Réservez votre table</span>
-          <h2 className="banner-title">Nouvelle Réservation</h2>
-        </div>
-        <div className="form-card-wrapper">
-          <div className="form-card">
-            <Link to="/my-reservations" className="btn-back">
-              &larr; Retour à mes réservations
-            </Link>
-            <div className="login-required-card" style={{ textAlign: 'center', padding: '40px 20px' }}>
-              <p>Vous devez être connecté pour effectuer une réservation.</p>
-              <div style={{ marginTop: '24px', display: 'flex', gap: '12px', justifyContent: 'center' }}>
-                <Link to="/login" className="btn btn-primary">Se Connecter</Link>
-                <Link to="/signup" className="btn btn-outline">Créer un Compte</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

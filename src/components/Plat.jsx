@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Plat({ name, description, price_cents, is_available }) {
-  // Format cents to euros (e.g. 1100 cents -> 11.00 €)
   const formatPrice = (cents) => {
     return (cents / 100).toFixed(2) + ' €';
   };

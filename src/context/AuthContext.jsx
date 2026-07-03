@@ -4,7 +4,6 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => {
-    // Check if this is a new browser tab/window session
     if (!sessionStorage.getItem('session_active')) {
       localStorage.removeItem('token');
       sessionStorage.setItem('session_active', 'true');

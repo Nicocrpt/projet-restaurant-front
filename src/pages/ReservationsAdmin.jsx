@@ -57,6 +57,14 @@ function ReservationsAdmin() {
   };
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    } else if (!isAdmin) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, isAdmin, navigate]);
+
+  useEffect(() => {
     fetchReservations();
   }, [statusFilter, dateFilter, token]);
 
@@ -137,15 +145,7 @@ function ReservationsAdmin() {
   };
 
   if (!isAuthenticated || !isAdmin) {
-    return (
-      <div className="admin-page placeholder-page">
-        <h2>Administration des Réservations</h2>
-        <p>Accès réservé aux administrateurs. Veuillez vous connecter avec un compte administrateur.</p>
-        <button onClick={() => navigate('/login')} className="btn btn-primary" style={{ marginTop: '20px' }}>
-          Se connecter
-        </button>
-      </div>
-    );
+    return null;
   }
 
   return (

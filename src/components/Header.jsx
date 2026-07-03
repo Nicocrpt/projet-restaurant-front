@@ -1,9 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
 function Header() {
+  const navigate = useNavigate();
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <header className="main-header">
@@ -26,7 +32,7 @@ function Header() {
           {isAuthenticated ? (
             <>
               <span className="user-email-display">{user?.email}</span>
-              <button onClick={logout} className="btn btn-outline btn-sm">
+              <button onClick={handleLogout} className="btn btn-outline btn-sm">
                 Déconnexion
               </button>
             </>
