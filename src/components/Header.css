@@ -87,43 +87,7 @@
     font-size: .9rem;
 }
 
-/* Boutons */
-.btn {
-    position: relative;
 
-    padding: 12px 28px;
-
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-
-    color: white;
-    background: transparent;
-    border: 1px solid transparent;
-
-    transition: all .3s ease;
-}
-
-/* Hover */
-.btn:hover {
-    border: 1px solid white;
-    background: rgba(255,255,255,.08);
-}
-
-/* Plus besoin de styles différents */
-.btn-outline,
-.btn-primary {
-    background: transparent;
-    color: white;
-    border: 1px solid transparent;
-}
-
-.btn-outline:hover,
-.btn-primary:hover {
-    border: 1px solid white;
-    background: rgba(255,255,255,.08);
-}
 
 /* Responsive */
 

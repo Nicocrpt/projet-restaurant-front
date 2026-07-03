@@ -33,7 +33,7 @@ function Home() {
             </p>
 
             <div className="presentation-buttons">
-              <button className="btn btn-primary">Découvrir la carte</button>
+              <button className="btn btn-outline">Découvrir la carte</button>
               <button className="btn btn-outline">Réserver une table</button>
             </div>
           </div>
@@ -101,11 +101,11 @@ function Home() {
               </div>
 
               <div className="contact-buttons">
-                <a href="tel:+33123456789" className="btn-contact">
+                <a href="tel:+33123456789" className="button-link" style={{ color: "var(--color-primary)" }}>
                   Appeler
                 </a>
 
-                <a href="/reservation" className="btn-contact">
+                <a href="/reservation" className="button-link" style={{ color: "var(--color-primary)" }}>
                   Réserver
                 </a>
               </div>

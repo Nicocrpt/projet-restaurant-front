@@ -25,14 +25,14 @@ function Header() {
           {isAuthenticated ? (
             <>
               <span className="user-email-display">{user?.email}</span>
-              <button onClick={logout} className="btn btn-outline btn-sm">
+              <button onClick={logout} className="button-link">
                 Déconnexion
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-outline">Connexion</Link>
-              <Link to="/signup" className="btn btn-primary btn-sm">S'inscrire</Link>
+              <Link to="/login" className="button-link">Connexion</Link>
+              <Link to="/signup" className="button-link">S'inscrire</Link>
             </>
           )}
         </div>

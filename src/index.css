@@ -5,7 +5,7 @@
   --bg-primary: #fffaf3;
   --bg-secondary: #fff3e0;
   --bg-tertiary: #ffe9cc;
-
+  --color-primary: #2b2118;
   --text-primary: #2b2118;
   --text-secondary: #6b5847;
   --text-muted: #9c8b78;
@@ -161,4 +161,36 @@ h1,h2, h3, h4, h5, h6 {
   height: 2px;
   background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
   margin: 12px 0 20px;
+}
+
+
+.button-link {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+.button-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: #d4af37;
+    transition: .3s;
+}
+
+.button-link:hover {
+    color: #d4af37;
+}
+
+.button-link:hover::after {
+    width: 100%;
 }
