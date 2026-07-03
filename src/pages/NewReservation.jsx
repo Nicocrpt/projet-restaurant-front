@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import './NewReservation.css';
 
 function NewReservation() {
   const navigate = useNavigate();
@@ -8,7 +9,6 @@ function NewReservation() {
   const [numberOfPeople, setNumberOfPeople] = useState(2);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('19:30');
-  const [phone, setPhone] = useState('');
   const [comment, setComment] = useState('');
   
   const [isLoading, setIsLoading] = useState(false);
@@ -42,10 +42,6 @@ function NewReservation() {
       return;
     }
 
-    const combinedComment = phone 
-      ? `Tél : ${phone}${comment ? ` | ${comment}` : ''}` 
-      : comment;
-
     try {
       const response = await fetch('/api/reservations', {
         method: 'POST',
@@ -57,7 +53,7 @@ function NewReservation() {
           number_of_people: Math.max(1, Number(numberOfPeople) || 2),
           date,
           time,
-          comment: combinedComment || undefined
+          comment: comment || undefined
         })
       });
 
@@ -185,18 +181,7 @@ function NewReservation() {
                 </select>
               </div>
 
-              {/* Phone number */}
-              <div className="form-group">
-                <label htmlFor="phone">Numéro de téléphone</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Ex: 06 12 34 56 78"
-                  required
-                />
-              </div>
+
 
               {/* Comment */}
               <div className="form-group">

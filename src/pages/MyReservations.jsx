@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReservationCard from '../components/ReservationCard.jsx';
+import EditReservationModal from '../components/EditReservationModal.jsx';
+import './MyReservations.css';
 
 function MyReservations() {
   const navigate = useNavigate();
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedReservation, setSelectedReservation] = useState(null);
 
   const token = localStorage.getItem('token');
 
@@ -47,7 +50,7 @@ function MyReservations() {
     fetchReservations();
   }, [token]);
 
-  const handleCancelReservation = async (id) => {
+  async function handleCancelReservation(id) {
     if (!window.confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
       return;
     }
@@ -75,7 +78,42 @@ function MyReservations() {
     }
   };
 
+  const handleUpdateReservation = async (updatedData) => {
+    const response = await fetch(
+      `/api/reservations/${selectedReservation.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+      }
+    );
 
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Impossible de mettre à jour la réservation.");
+    }
+
+    // Reconstruction locale de la réservation avec les nouvelles données
+    const updatedReservation = {
+      ...selectedReservation,
+      number_of_people: updatedData.number_of_people,
+      starts_at: `${updatedData.date} ${updatedData.time}:00`, // Format YYYY-MM-DD HH:MM:SS requis par la carte
+      comment: updatedData.comment
+    };
+
+    // Mise à jour de l'état local pour rafraîchir la carte immédiatement
+    setReservations(prev =>
+      prev.map(res =>
+        res.id === selectedReservation.id
+          ? updatedReservation
+          : res
+      )
+    );
+  };
 
   if (!token) {
     return (
@@ -130,11 +168,19 @@ function MyReservations() {
                 key={res.id} 
                 res={res} 
                 onCancel={handleCancelReservation} 
+                onEdit={setSelectedReservation}
               />
             ))}
           </div>
         )}
       </div>
+      {selectedReservation && (
+        <EditReservationModal
+          reservation={selectedReservation}
+          onClose={() => setSelectedReservation(null)}
+          onSave={handleUpdateReservation}
+        />
+      )}
     </div>
   );
 }
