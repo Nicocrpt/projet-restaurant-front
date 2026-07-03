@@ -77,7 +77,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button type="submit">
+            <button type="submit" onClick={handleSubmit}>
               Se connecter
             </button>
           </form>

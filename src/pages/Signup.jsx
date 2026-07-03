@@ -98,7 +98,7 @@ function Signup() {
 
             <input type="password" placeholder="Confirmer le mot de passe" />
 
-            <button type="submit">
+            <button type="submit" onClick={handleSubmit}>
               S'inscrire
             </button>
 

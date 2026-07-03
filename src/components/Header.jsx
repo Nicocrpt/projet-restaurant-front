@@ -39,7 +39,7 @@ function Header() {
           {isAuthenticated ? (
             <>
               <span className="user-email-display">{user?.email}</span>
-              <button onClick={logout} className="button-link">
+              <button onClick={logout} className="btn-logout">
                 Déconnexion
               </button>
             </>
