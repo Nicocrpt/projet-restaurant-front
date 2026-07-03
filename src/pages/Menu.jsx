@@ -1,12 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import MenuComponent from '../components/Menu.jsx';
+import Banner from '../components/Banner.jsx';
 
 function Menu() {
   return (
-    <div className="placeholder-page">
-      <h2>Carte du Restaurant</h2>
-      <p>Notre carte gourmande de saison sera bientôt disponible ici !</p>
-      <Link to="/" className="btn btn-primary">Retour à l'accueil</Link>
+    <div className="menu-page-container">
+      <Banner
+        tagline="Découvrez notre savoir-faire"
+        title="La Carte Gourmande"
+        subtitle="Chaque plat est une invitation au voyage gustatif, préparé à la minute avec amour."
+        displayButton
+      />
+
+      <div className="menu-content-container">
+        <MenuComponent />
+      </div>
     </div>
   );
 }

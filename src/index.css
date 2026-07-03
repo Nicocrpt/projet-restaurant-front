@@ -1,33 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 :root {
-  /* Color Palette - Luxury Dark Theme */
-  --bg-primary: #0a0a0c;
-  --bg-secondary: #121216;
-  --bg-tertiary: #1a1a22;
-  
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  
-  --accent: #d4af37;        /* Luxury Gold */
-  --accent-hover: #f3cf65;  /* Lighter Gold */
-  --accent-rgb: 212, 175, 55;
-  
-  --border-color: #24242c;
-  --border-hover: #3a3a46;
-  
+  /* Color Palette - Festive Light Theme */
+  --bg-primary: #fffaf3;
+  --bg-secondary: #fff3e0;
+  --bg-tertiary: #ffe9cc;
+  --color-primary: #2b2118;
+  --text-primary: #2b2118;
+  --text-secondary: #6b5847;
+  --text-muted: #9c8b78;
+
+  --accent: #e0954e;         /* Orange doré festif */
+  --accent-hover: #f2ab5f;   /* Orange plus clair */
+  --accent-rgb: 224, 149, 78;
+
+  --accent-secondary: #d9455f; /* Rose/rouge festif en touche */
+  --accent-secondary-rgb: 217, 69, 95;
+
+  --border-color: #f0ddc4;
+  --border-hover: #e0c49a;
+
   /* Fonts */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  
+  --font-serif:  Georgia, serif;
+  --font-sans:  Georgia,sans-serif;
+
   /* Layout */
   --max-width: 1200px;
   --header-height: 80px;
-  
+
   /* Transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(224, 149, 78, 0.15);
 }
 
 /* Global Reset */
@@ -59,7 +62,7 @@ a {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   color: var(--text-primary);
   font-weight: 600;
@@ -84,14 +87,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background-color: var(--accent);
-  color: #000;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  color: #fffaf3;
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
+  filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.35);
 }
 
 .btn-secondary {
@@ -101,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(var(--accent-rgb), 0.1);
+  background-color: rgba(var(--accent-rgb), 0.12);
   color: var(--accent-hover);
   transform: translateY(-2px);
 }
@@ -136,7 +139,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .placeholder-page h2 {
   font-size: 36px;
-  color: var(--accent);
+  color: var(--accent-secondary);
 }
 
 .placeholder-page p {
@@ -149,13 +152,45 @@ h1, h2, h3, h4, h5, h6 {
 .divider {
   width: 60px;
   height: 3px;
-  background-color: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
   margin: 20px 0;
 }
 
 .divider-small {
   width: 40px;
   height: 2px;
-  background-color: var(--accent);
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
   margin: 12px 0 20px;
+}
+
+
+.button-link {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+
+.button-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: #d4af37;
+    transition: .3s;
+}
+
+.button-link:hover {
+    color: #d4af37;
+}
+
+.button-link:hover::after {
+    width: 100%;
 }
