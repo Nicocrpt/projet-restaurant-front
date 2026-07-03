@@ -1,13 +1,13 @@
-# 🍽️ L'Étoile Dorée - Front-End (React + Vite)
+# MOYA - Front-End (React + Vite)
 
-Ce projet est la partie cliente (Front-End) de l'application de réservation pour le restaurant **L'Étoile Dorée**. Il a été développé avec **React 19**, **Vite** et du **CSS pur** (Vanilla CSS) pour des performances optimales et une esthétique soignée (mode sombre raffiné, transitions fluides et responsive design).
+Ce projet est la partie cliente (Front-End) de l'application de réservation pour le restaurant **MOYA**. Il a été développé avec **React 19**, **Vite** et du **CSS pur** (Vanilla CSS) pour des performances optimales et une esthétique soignée (mode sombre raffiné, transitions fluides et responsive design).
 
 ---
 
-## 🚀 Installation & Démarrage
+## Installation & Démarrage
 
 ### Prérequis
-* [Node.js](https://nodejs.org/) (Version 18 ou supérieure recommandée)
+* [Node.js]
 * Le serveur backend (projet `projet_final_restaurant`) lancé en parallèle sur le port `3000`.
 
 ### 1. Installation des dépendances
@@ -22,11 +22,10 @@ Pour lancer le serveur de développement local de Vite :
 npm run dev
 ```
 Par défaut, l'application est accessible à l'adresse : [http://localhost:5173/](http://localhost:5173/). 
-*Remarque : Les requêtes vers `/api/*` sont automatiquement redirigées vers le serveur backend (`http://localhost:3000`) grâce au proxy configuré dans `vite.config.js`.*
 
 ---
 
-## 🗺️ Documentation des Routes Front-End
+## Documentation des Routes Front-End
 
 Le routage est géré avec `react-router-dom` (v6). Voici la liste des routes déclarées :
 
@@ -41,13 +40,13 @@ Le routage est géré avec `react-router-dom` (v6). Voici la liste des routes d�
 | `/reservations` | **Admin Réservations** (`ReservationsAdmin.jsx`) | Connecté (Admin uniquement) | Tableau de bord de gestion pour valider ou rejeter les demandes clients. |
 | `*` | **Redirection** | Public | Redirige toutes les URL inconnues vers la page d'accueil (`/`). |
 
-### 🔒 Sécurité et Protections d'accès
+### Sécurité et Protections d'accès
 * **Espace Client (`/reservations/new` et `/my-reservations`) :** Si un visiteur non connecté tente d'accéder à ces pages, il est automatiquement redirigé de manière invisible vers `/login`.
 * **Espace Admin (`/reservations`) :** Cette page est strictement restreinte. Un utilisateur non connecté est redirigé vers `/login`, tandis qu'un utilisateur connecté avec le rôle standard `client` est redirigé vers la page d'accueil `/`.
 
 ---
 
-## 🏗️ Architecture et Arborescence des Composants
+## Architecture et Arborescence des Composants
 
 L'application est structurée autour d'un contexte d'authentification global (`AuthProvider`) qui distribue l'état de l'utilisateur sur l'ensemble de l'arbre.
 
@@ -66,6 +65,7 @@ graph TD
     Routes --> Home["Home.jsx (Page)"]
     Home --> Hero[Hero.jsx]
     Home --> FeatureCard[FeatureCard.jsx]
+    Home --> Horaires[Horaires.jsx]
     
     Routes --> MenuPage["Menu.jsx (Page)"]
     MenuPage --> Menu["Menu.jsx (Composant métier)"]
@@ -77,8 +77,7 @@ graph TD
     Routes --> Signup["Signup.jsx (Page)"]
     
     Routes --> MyReservations["MyReservations.jsx (Page)"]
-    MyReservations --> ReservationCard[ReservationCard.jsx]
-    ReservationCard --> StatusBadge1[StatusBadge.jsx]
+    MyReservations --> StatusBadge1[StatusBadge.jsx]
     
     Routes --> NewReservation["NewReservation.jsx (Page)"]
     
@@ -92,5 +91,3 @@ graph TD
 * **`Header` (dans `components/Header.jsx`) :** Barre de navigation adaptative. Elle s'adapte dynamiquement si l'utilisateur est authentifié et/ou s'il est administrateur. Le bouton de déconnexion redirige automatiquement vers `/`.
 * **`Menu` (dans `components/Menu.jsx`) :** Composant conteneur qui effectue les requêtes API pour récupérer la carte, applique les filtres en temps réel (via `MenuFilters`) et génère les catégories gourmandes.
 * **`StatusBadge` (dans `components/StatusBadge.jsx`) :** Affiche un badge coloré en fonction du statut de la réservation (`pending`, `confirmed`, `seated`, `completed`, `cancelled`, `no_show`).
-* **`ReservationCard` (dans `components/ReservationCard.jsx`) :** Encapsule le rendu d'une carte de réservation pour le client, avec formatage de la date en français et bouton d'annulation conditionnel.
-
