@@ -1,39 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import FeatureCard from '../components/FeatureCard.jsx';
-import Horaires from '../components/Horaires.jsx';
-import Hero from '../components/Hero.jsx';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import FeatureCard from "../components/FeatureCard.jsx";
+import Hero from "../components/Hero.jsx";
+import platRisotto from "../assets/plat-risotto.jpg";
+import "./Home.css";
 function Home() {
-  const features = [
-    {
-      icon: "✨",
-      title: "Cuisine Raffinée",
-      description: "Des plats d'exception préparés avec rigueur et créativité par notre brigade."
-    },
-    {
-      icon: "🌿",
-      title: "Produits Locaux",
-      description: "Une sélection rigoureuse d'ingrédients de saison en circuit court."
-    },
-    {
-      icon: "🍷",
-      title: "Cave d'Exception",
-      description: "Des accords mets-vins méticuleusement sélectionnés pour parfaire votre repas."
-    },
-    {
-      icon: "🕯️",
-      title: "Ambiance Cosy",
-      description: "Un cadre chaleureux et intime pour savourer chaque moment."
-    }
-  ];
-
   return (
     <div className="home-container">
       {/* Hero Section */}
-      <Hero 
+      <Hero
         tagline="Haute Gastronomie"
-        title="L'Étoile Dorée"
+        title="Noma"
         subtitle="Une table d'exception alliant tradition culinaire française et créativité moderne."
         primaryText="Découvrir la Carte"
         primaryLink="/menu"
@@ -41,58 +18,103 @@ function Home() {
         secondaryLink="/my-reservations"
       />
 
-      {/* Philosophy / Story Section */}
-      <section className="story-section">
-        <div className="section-container">
-          <div className="story-grid">
-            <div className="story-text animate-fade-in">
-              <span className="section-subtitle">Notre Histoire</span>
-              <h2 className="section-title">L'Art de la Table</h2>
-              <div className="divider"></div>
-              <p>
-                Depuis sa création, <strong>L'Étoile Dorée</strong> s'efforce de sublimer les produits du terroir à travers des recettes raffinées et innovantes. Notre Chef sélectionne chaque jour des ingrédients frais et de saison auprès de producteurs locaux passionnés.
-              </p>
-              <p>
-                Que ce soit pour un déjeuner d'affaires, un dîner romantique ou une célébration familiale, nous mettons tout en œuvre pour vous offrir une expérience sensorielle inoubliable, mariant parfaitement les saveurs et les textures.
-              </p>
+      {/* Features Section */}
+      <section className="presentation-section">
+        <div className="presentation-container">
+          <div className="presentation-content">
+            <span className="section-tag">Notre Histoire</span>
+
+            <h2>Une cuisine inspirée par la tradition</h2>
+
+            <p>
+              Depuis notre ouverture, nous proposons une cuisine raffinée
+              élaborée à partir de produits frais et de saison. Chaque assiette
+              est pensée pour offrir une expérience gastronomique unique.
+            </p>
+
+            <div className="presentation-buttons">
+              <button className="btn btn-outline">Découvrir la carte</button>
+              <button className="btn btn-outline">Réserver une table</button>
             </div>
-            
-            <div className="features-grid">
-              {features.map((feature, index) => (
-                <FeatureCard 
-                  key={index}
-                  icon={feature.icon}
-                  title={feature.title}
-                  description={feature.description}
-                />
-              ))}
-            </div>
+          </div>
+
+          <div className="presentation-image">
+            <img src={platRisotto} alt="Plat de risotto" />
           </div>
         </div>
       </section>
 
-      {/* Quick Info & Hours Section */}
-      <section className="info-section">
+      <section className="contact-section">
         <div className="section-container">
-          <div className="info-grid">
-            {/* Opening Hours Component */}
-            <Horaires />
+          <span className="section-tag">Informations</span>
+          <h2 className="section-title">Nous contacter</h2>
 
-            {/* Contact Details Card */}
-            <div className="info-card contact-card">
-              <h3 className="card-title">📍 Nous Trouver</h3>
-              <div className="divider-small"></div>
-              <p className="contact-detail">
-                <strong>Adresse :</strong> 42 Rue de la Gastronomie, 75001 Paris
-              </p>
-              <p className="contact-detail">
-                <strong>Téléphone :</strong> +33 (0)1 23 45 67 89
-              </p>
-              <p className="contact-detail">
-                <strong>Email :</strong> contact@letoiledoree.fr
-              </p>
-              <div className="contact-actions">
-                <a href="tel:+33123456789" className="btn-link">Appeler le restaurant</a>
+          <div className="contact-grid">
+            <div className="contact-block">
+              <h3>Horaires</h3>
+
+              <ul>
+                <li>
+                  <span>Lundi</span>
+                  <span>Fermé</span>
+                </li>
+                <li>
+                  <span>Mardi - Vendredi</span>
+                  <span className="hours">
+                    12h00 - 14h30
+                    <span className="separator"></span>
+                    19h00 - 22h30
+                  </span>
+                </li>
+                <li>
+                  <span>Samedi</span>
+                  <span>19h00 - 23h00</span>
+                </li>
+                <li>
+                  <span>Dimanche</span>
+                  <span>12h00 - 15h00</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="contact-block">
+              <h3>Le restaurant</h3>
+
+              <div className="contact-item">
+                <span>Adresse</span>
+                <p>
+                  42 Rue de la Gastronomie
+                  <br />
+                  75001 Paris
+                </p>
+              </div>
+
+              <div className="contact-item">
+                <span>Téléphone</span>
+                <p>+33 (0)1 23 45 67 89</p>
+              </div>
+
+              <div className="contact-item">
+                <span>Email</span>
+                <p>contact@moya.fr</p>
+              </div>
+
+              <div className="contact-buttons">
+                <a
+                  href="tel:+33123456789"
+                  className="button-link"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Appeler
+                </a>
+
+                <a
+                  href="/reservation"
+                  className="button-link"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Réserver
+                </a>
               </div>
             </div>
           </div>

@@ -3,7 +3,15 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(() => {
+    if (!sessionStorage.getItem('session_active')) {
+      localStorage.removeItem('token');
+      sessionStorage.setItem('session_active', 'true');
+      return null;
+    }
+    sessionStorage.setItem('session_active', 'true');
+    return localStorage.getItem('token');
+  });
   const [user, setUser] = useState(null);
 
   const decodeToken = (jwtToken) => {

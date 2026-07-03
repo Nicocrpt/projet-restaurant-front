@@ -21,7 +21,6 @@ function Signup() {
     setIsLoading(true);
     setError(null);
 
-    // Validation
     if (password !== confirmPassword) {
       setError("Les mots de passe ne correspondent pas.");
       setIsLoading(false);
@@ -29,7 +28,6 @@ function Signup() {
     }
 
     try {
-      // 1. Inscription
       const signupResponse = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -48,7 +46,6 @@ function Signup() {
         throw new Error(signupData.error || "Une erreur est survenue lors de l'inscription.");
       }
 
-      // 2. Connexion automatique suite à l'inscription réussie
       const loginResponse = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,7 +58,6 @@ function Signup() {
         throw new Error("Compte créé avec succès, mais la connexion automatique a échoué. Veuillez vous connecter manuellement.");
       }
 
-      // Enregistre le token dans le contexte global
       login(loginData.token);
       navigate('/');
     } catch (err) {
