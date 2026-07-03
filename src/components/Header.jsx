@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
-
+import './Header.css';
 function Header() {
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
 
@@ -9,8 +9,7 @@ function Header() {
     <header className="main-header">
       <div className="header-container">
         <Link to="/" className="logo-brand">
-          <span className="logo-icon">✨</span>
-          <span className="logo-text">L'Étoile Dorée</span>
+          <span className="logo-text">Moya</span>
         </Link>
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Accueil</Link>

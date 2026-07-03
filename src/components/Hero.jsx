@@ -1,29 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Hero.css";
 
-function Hero({ tagline, title, subtitle, primaryText, primaryLink, secondaryText, secondaryLink }) {
+import heroImage from "../assets/restaurant.jpg"; // adapte le chemin
+
+function Hero() {
   return (
-    <section className="hero-section">
-      <div className="hero-overlay"></div>
+    <section
+      className="hero"
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
       <div className="hero-content">
-        {tagline && <span className="hero-tagline">{tagline}</span>}
-        <h1 className="hero-title">{title}</h1>
-        {subtitle && <p className="hero-subtitle">{subtitle}</p>}
-        <div className="hero-actions">
-          {primaryText && primaryLink && (
-            <Link to={primaryLink} className="btn btn-primary">
-              {primaryText}
-            </Link>
-          )}
-          {secondaryText && secondaryLink && (
-            <Link to={secondaryLink} className="btn btn-secondary">
-              {secondaryText}
-            </Link>
-          )}
-        </div>
+        <h1 className="hero-title">Moya</h1>
       </div>
     </section>
   );
 }
-
 export default Hero;
