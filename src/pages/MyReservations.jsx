@@ -66,7 +66,9 @@ function MyReservations() {
         throw new Error(data.error || "Une erreur est survenue lors de l'annulation.");
       }
 
-      setReservations(prev => prev.filter(res => res.id !== id));
+      setReservations(prev =>
+        prev.map(res => (res.id === id ? { ...res, status: 'cancelled' } : res))
+      );
       alert("La réservation a été annulée avec succès.");
     } catch (err) {
       alert(`Erreur d'annulation: ${err.message}`);
