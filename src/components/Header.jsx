@@ -24,6 +24,9 @@ function Header() {
           <Link to="/menu" className="nav-link">
             La Carte
           </Link>
+           <Link to="/login" className="nav-link">
+            Reserver une table
+          </Link>
           {isAuthenticated && (
             <Link to="/my-reservations" className="nav-link">
               Mes Réservations

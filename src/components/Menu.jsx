@@ -6,7 +6,6 @@ function Menu() {
   const [menuData, setMenuData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [absoluteMaxPrice, setAbsoluteMaxPrice] = useState(50);
   const [maxPrice, setMaxPrice] = useState(50);
@@ -121,7 +120,6 @@ function Menu() {
     entree: 'Entrées',
     plat: 'Plats Principaux',
     dessert: 'Desserts',
-    autres: 'Autres suggestions'
   };
 
   const handleResetFilters = () => {

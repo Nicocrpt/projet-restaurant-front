@@ -1,0 +1,81 @@
+.plat-card {
+  position: relative;
+  background: #fffdf9;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 14px 16px;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* petit effet “table de restaurant” */
+.plat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(0,0,0,0.03), transparent 60%);
+  pointer-events: none;
+}
+
+/* hover élégant (pas trop “startup”) */
+.plat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* header */
+.plat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+/* nom du plat */
+.plat-name {
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* prix */
+.plat-price {
+  font-family: "Georgia", serif;
+  font-size: 14px;
+  color: #a8742a; /* petit ton doré chic */
+}
+
+/* description */
+.plat-description {
+  font-size: 12.5px;
+  color: #666;
+  line-height: 1.4;
+  margin: 6px 0 0;
+}
+
+/* badge indisponible */
+.plat-badge-indisponible {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(160, 160, 160, 0.12);
+  color: #777;
+  letter-spacing: 0.5px;
+}
+
+/* état indisponible (carte désaturée) */
+.plat-card.indisponible {
+  opacity: 0.65;
+  filter: grayscale(0.3);
+}
+
+.plat-card.indisponible:hover {
+  transform: none;
+  box-shadow: none;
+}
