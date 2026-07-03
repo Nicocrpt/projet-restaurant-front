@@ -1,8 +1,8 @@
 import React from 'react';
 import StatusBadge from './StatusBadge.jsx';
 
-function ReservationCard({ res, onCancel }) {
-  const isCancelable = res.status === 'pending';
+function ReservationCard({ res, onCancel, onEdit }) {
+  const isEditable = res.status === 'pending';
 
   const formatReservationDate = (dateStr) => {
     try {
@@ -46,8 +46,13 @@ function ReservationCard({ res, onCancel }) {
         )}
       </div>
 
-      {isCancelable && (
+      
         <div className="res-card-footer">
+          {isEditable && (
+            <button onClick={() => onEdit(res)}>
+              Modifier
+            </button>
+          )}
           <button 
             onClick={() => onCancel(res.id)}
             className="btn btn-secondary btn-sm btn-cancel"
@@ -55,7 +60,6 @@ function ReservationCard({ res, onCancel }) {
             Annuler la réservation
           </button>
         </div>
-      )}
     </article>
   );
 }
