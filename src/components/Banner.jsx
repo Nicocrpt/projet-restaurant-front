@@ -10,7 +10,7 @@ function Banner({ tagline, title, subtitle, displayButton = false }) {
       {subtitle && <p className="banner-subtitle">{subtitle}</p>}
       {displayButton && (
         <Link to="/reservations/new" className="button-link">
-          ✨ Réserver une Table
+          Réserver une Table
         </Link>
       )}
     </section>
