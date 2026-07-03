@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function NewReservation() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [numberOfPeople, setNumberOfPeople] = useState(2);
   const [date, setDate] = useState('');
   const [time, setTime] = useState('19:30');
+  const [phone, setPhone] = useState('');
   const [comment, setComment] = useState('');
   
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +42,10 @@ function NewReservation() {
       return;
     }
 
+    const combinedComment = phone 
+      ? `Tél : ${phone}${comment ? ` | ${comment}` : ''}` 
+      : comment;
+
     try {
       const response = await fetch('/api/reservations', {
         method: 'POST',
@@ -47,10 +54,10 @@ function NewReservation() {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          number_of_people: Number(numberOfPeople),
+          number_of_people: Math.max(1, Number(numberOfPeople) || 2),
           date,
           time,
-          comment: comment || undefined
+          comment: combinedComment || undefined
         })
       });
 
@@ -70,6 +77,16 @@ function NewReservation() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="reservation-form-container">
@@ -109,7 +126,21 @@ function NewReservation() {
                     min="1"
                     max="10"
                     value={numberOfPeople}
-                    onChange={(e) => setNumberOfPeople(Math.max(1, Number(e.target.value)))}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === '') {
+                        setNumberOfPeople('');
+                      } else {
+                        setNumberOfPeople(Number(val));
+                      }
+                    }}
+                    onBlur={() => {
+                      if (numberOfPeople === '' || numberOfPeople < 1) {
+                        setNumberOfPeople(1);
+                      } else if (numberOfPeople > 10) {
+                        setNumberOfPeople(10);
+                      }
+                    }}
                     required
                   />
                   <span className="input-suffix">personnes</span>
@@ -152,6 +183,19 @@ function NewReservation() {
                     <option value="21:00">21:00</option>
                   </optgroup>
                 </select>
+              </div>
+
+              {/* Phone number */}
+              <div className="form-group">
+                <label htmlFor="phone">Numéro de téléphone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Ex: 06 12 34 56 78"
+                  required
+                />
               </div>
 
               {/* Comment */}

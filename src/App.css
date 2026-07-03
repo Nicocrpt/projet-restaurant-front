@@ -871,6 +871,17 @@
   padding-right: 100px;
 }
 
+/* Hide native number spinners to prevent overlap and match modern design */
+.input-number-wrapper input::-webkit-outer-spin-button,
+.input-number-wrapper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-number-wrapper input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .input-suffix {
   position: absolute;
   right: 16px;

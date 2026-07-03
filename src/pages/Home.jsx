@@ -47,7 +47,6 @@ function Home() {
       <section className="contact-section">
         <div className="section-container">
           <span className="section-tag">Informations</span>
-
           <h2 className="section-title">Nous contacter</h2>
 
           <div className="contact-grid">
@@ -101,11 +100,19 @@ function Home() {
               </div>
 
               <div className="contact-buttons">
-                <a href="tel:+33123456789" className="button-link" style={{ color: "var(--color-primary)" }}>
+                <a
+                  href="tel:+33123456789"
+                  className="button-link"
+                  style={{ color: "var(--color-primary)" }}
+                >
                   Appeler
                 </a>
 
-                <a href="/reservation" className="button-link" style={{ color: "var(--color-primary)" }}>
+                <a
+                  href="/reservation"
+                  className="button-link"
+                  style={{ color: "var(--color-primary)" }}
+                >
                   Réserver
                 </a>
               </div>

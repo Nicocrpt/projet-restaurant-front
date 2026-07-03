@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusBadge from '../components/StatusBadge.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 function ReservationsAdmin() {
   const navigate = useNavigate();
+  const { isAuthenticated, isAdmin } = useAuth();
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,6 +55,14 @@ function ReservationsAdmin() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    } else if (!isAdmin) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, isAdmin, navigate]);
 
   useEffect(() => {
     fetchReservations();
@@ -134,16 +144,8 @@ function ReservationsAdmin() {
     }
   };
 
-  if (!token) {
-    return (
-      <div className="admin-page placeholder-page">
-        <h2>Administration des Réservations</h2>
-        <p>Connexion requise. Veuillez vous connecter avec un compte administrateur.</p>
-        <button onClick={() => navigate('/login')} className="btn btn-primary" style={{ marginTop: '20px' }}>
-          Se connecter
-        </button>
-      </div>
-    );
+  if (!isAuthenticated || !isAdmin) {
+    return null;
   }
 
   return (
