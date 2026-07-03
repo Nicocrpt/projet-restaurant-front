@@ -23,6 +23,16 @@ npm run dev
 ```
 Par défaut, l'application est accessible à l'adresse : [http://localhost:5173/](http://localhost:5173/). 
 
+### 👤 Comptes de Test / Connexion
+Pour tester l'application (client et administrateur), vous pouvez utiliser les identifiants par défaut suivants (configurés en base de données) :
+
+* **Compte Client :**
+  * **Email :** `client@restaurant.local`
+  * **Mot de passe :** `ClientPassword123!`
+* **Compte Administrateur :**
+  * **Email :** `admin@restaurant.local`
+  * **Mot de passe :** `AdminPassword123!`
+
 ---
 
 ## Documentation des Routes Front-End
