@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusBadge from '../components/StatusBadge.jsx';
+import Banner from '../components/Banner.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import './ReservationsAdmin.css';
 
 function ReservationsAdmin() {
   const navigate = useNavigate();
@@ -150,13 +152,11 @@ function ReservationsAdmin() {
 
   return (
     <div className="admin-page">
-      <section className="admin-banner">
-        <span className="banner-tagline">Console d'administration</span>
-        <h2 className="banner-title">Gestion des Réservations</h2>
-        <p className="banner-subtitle">
-          Validez, refusez et suivez en temps réel l'ensemble des réservations du restaurant.
-        </p>
-      </section>
+      <Banner
+        tagline="Console d'administration"
+        title="Gestion des Réservations"
+        subtitle="Validez, refusez et suivez en temps réel l'ensemble des réservations du restaurant."
+      />
 
       <div className="admin-container">
         {/* Filters Panel */}

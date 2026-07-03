@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ReservationCard from '../components/ReservationCard.jsx';
 import EditReservationModal from '../components/EditReservationModal.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import Banner from '../components/Banner.jsx';
 import './MyReservations.css';
 
 function MyReservations() {
@@ -129,16 +130,12 @@ function MyReservations() {
 
   return (
     <div className="reservations-page">
-      <section className="reservations-banner">
-        <span className="banner-tagline">Vos moments privilégiés</span>
-        <h2 className="banner-title">Mes Réservations</h2>
-        <p className="banner-subtitle">
-          Retrouvez et gérez vos réservations de table dans notre établissement.
-        </p>
-        <Link to="/reservations/new" className="btn btn-primary banner-action">
-          ✨ Réserver une Table
-        </Link>
-      </section>
+      <Banner
+        tagline="Vos moments privilégiés"
+        title="Mes Réservations"
+        subtitle="Retrouvez et gérez vos réservations de table dans notre établissement."
+        displayButton
+      />
 
       <div className="reservations-content">
         {isLoading ? (
