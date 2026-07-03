@@ -1,0 +1,144 @@
+/* ==========================================
+   Page : Gestion des Réservations (Admin)
+   ========================================== */
+
+/* Conteneur principal */
+.admin-container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 40px auto 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Barre de filtres */
+.admin-filters-bar {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px 30px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.admin-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-filter-group label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.admin-filter-group select, .admin-filter-group input {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.reset-admin-filters {
+  height: 42px;
+}
+
+/* Tableau des réservations */
+.admin-table-wrapper {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-table th, .admin-table td {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table th {
+  background-color: var(--bg-tertiary);
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.row-pending {
+  background-color: rgba(245, 158, 11, 0.02);
+}
+
+.table-comment {
+  max-width: 250px;
+  color: var(--text-secondary);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-action-validate {
+  background-color: var(--accent) !important;
+  color: #000 !important;
+}
+
+.btn-action-validate:hover {
+  background-color: var(--accent-hover) !important;
+  box-shadow: 0 2px 10px rgba(var(--accent-rgb), 0.2) !important;
+}
+
+.btn-action-cancel {
+  border-color: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+.btn-action-cancel:hover {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

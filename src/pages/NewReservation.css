@@ -8,39 +8,7 @@
   /* Hérite du fond de page global crème #fffaf3 */
 }
 
-/* Bannière de la page avec fond d'écran sombre pour intégrer l'en-tête absolu */
-.form-banner {
-  position: relative;
-  padding: 160px 20px 80px; /* Décale le titre sous le header absolu */
-  text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/restaurant.jpg');
-  background-size: cover;
-  background-position: center;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.form-banner .banner-tagline {
-  display: block;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #b08d57; /* Doré signature */
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.form-banner .banner-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 3rem;
-  font-weight: 500;
-  color: #ffffff; /* Blanc pour lisibilité sur fond sombre */
-  margin-bottom: 10px;
-}
+/* La bannière est gérée par le composant réutilisable <Banner /> (styles dans App.css) */
 
 /* Enveloppe de la carte de formulaire */
 .form-card-wrapper {
@@ -191,8 +159,5 @@
 @media (max-width: 576px) {
   .form-card {
     padding: 30px 20px;
-  }
-  .form-banner .banner-title {
-    font-size: 2.2rem;
   }
 }

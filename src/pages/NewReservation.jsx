@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import Banner from '../components/Banner.jsx';
 import './NewReservation.css';
 
 function NewReservation() {
@@ -86,10 +87,7 @@ function NewReservation() {
 
   return (
     <div className="reservation-form-container">
-      <div className="form-banner">
-        <span className="banner-tagline">Réservez votre table</span>
-        <h2 className="banner-title">Nouvelle Réservation</h2>
-      </div>
+      <Banner tagline="Réservez votre table" title="Nouvelle Réservation" />
 
       <div className="form-card-wrapper">
         <div className="form-card">
