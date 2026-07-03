@@ -77,12 +77,14 @@ graph TD
     Routes --> Signup["Signup.jsx (Page)"]
     
     Routes --> MyReservations["MyReservations.jsx (Page)"]
-    MyReservations --> StatusBadge1[StatusBadge.jsx]
+    MyReservations --> ReservationCard[ReservationCard.jsx]
+    ReservationCard --> StatusBadge1[StatusBadge.jsx]
     
     Routes --> NewReservation["NewReservation.jsx (Page)"]
     
     Routes --> ReservationsAdmin["ReservationsAdmin.jsx (Page)"]
-    ReservationsAdmin --> StatusBadge2[StatusBadge.jsx]
+    ReservationsAdmin --> AdminReservationRow[AdminReservationRow.jsx]
+    AdminReservationRow --> StatusBadge2[StatusBadge.jsx]
 ```
 
 ### Rôle des Composants Principaux
@@ -91,3 +93,5 @@ graph TD
 * **`Header` (dans `components/Header.jsx`) :** Barre de navigation adaptative. Elle s'adapte dynamiquement si l'utilisateur est authentifié et/ou s'il est administrateur. Le bouton de déconnexion redirige automatiquement vers `/`.
 * **`Menu` (dans `components/Menu.jsx`) :** Composant conteneur qui effectue les requêtes API pour récupérer la carte, applique les filtres en temps réel (via `MenuFilters`) et génère les catégories gourmandes.
 * **`StatusBadge` (dans `components/StatusBadge.jsx`) :** Affiche un badge coloré en fonction du statut de la réservation (`pending`, `confirmed`, `seated`, `completed`, `cancelled`, `no_show`).
+* **`ReservationCard` (dans `components/ReservationCard.jsx`) :** Encapsule le rendu d'une carte de réservation pour le client, avec formatage de la date en français et bouton d'annulation conditionnel.
+* **`AdminReservationRow` (dans `components/AdminReservationRow.jsx`) :** Représente une ligne du registre de réservations dans la console admin, avec ses boutons de validation/annulation conditionnels et formatage local de la date.

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import StatusBadge from '../components/StatusBadge.jsx';
-import Banner from '../components/Banner.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import AdminReservationRow from '../components/AdminReservationRow.jsx';
 import './ReservationsAdmin.css';
 
 function ReservationsAdmin() {
@@ -85,7 +84,6 @@ function ReservationsAdmin() {
         throw new Error(data.error || "Une erreur est survenue lors de la validation.");
       }
 
-      // Dynamic real-time update
       setReservations(prev =>
         prev.map(res => (res.id === id ? { ...res, status: 'confirmed' } : res))
       );
@@ -113,7 +111,6 @@ function ReservationsAdmin() {
         throw new Error(data.error || "Une erreur est survenue lors de l'annulation.");
       }
 
-      // Dynamic real-time update
       setReservations(prev =>
         prev.map(res => (res.id === id ? { ...res, status: 'cancelled' } : res))
       );
@@ -125,25 +122,6 @@ function ReservationsAdmin() {
   const handleResetFilters = () => {
     setStatusFilter('all');
     setDateFilter('');
-  };
-
-  // Helper: Format DB date-time to French string
-  const formatReservationDate = (dateStr) => {
-    try {
-      const date = new Date(dateStr.replace(' ', 'T'));
-      const dayStr = date.toLocaleDateString('fr-FR', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
-      const timeStr = date.toLocaleTimeString('fr-FR', {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-      return `${dayStr} - ${timeStr}`;
-    } catch (e) {
-      return dateStr;
-    }
   };
 
   if (!isAuthenticated || !isAdmin) {
@@ -225,42 +203,14 @@ function ReservationsAdmin() {
                 </tr>
               </thead>
               <tbody>
-                {reservations.map((res) => {
-                  const isPending = res.status === 'pending';
-                  const isCancelable = res.status === 'pending' || res.status === 'confirmed';
-
-                  return (
-                    <tr key={res.id} className={isPending ? 'row-pending' : ''}>
-                      <td><strong>#{res.id}</strong></td>
-                      <td>ID #{res.user_id}</td>
-                      <td>{formatReservationDate(res.starts_at)}</td>
-                      <td>{res.number_of_people} pers.</td>
-                      <td className="table-comment">{res.comment ? `"${res.comment}"` : '-'}</td>
-                      <td><StatusBadge status={res.status} /></td>
-                      <td className="table-actions">
-                        {isPending && (
-                          <button
-                            onClick={() => handleValidate(res.id)}
-                            className="btn btn-primary btn-sm btn-action-validate"
-                          >
-                            Valider
-                          </button>
-                        )}
-                        {isCancelable && (
-                          <button
-                            onClick={() => handleCancel(res.id)}
-                            className="btn btn-secondary btn-sm btn-action-cancel"
-                          >
-                            Annuler
-                          </button>
-                        )}
-                        {!isPending && !isCancelable && (
-                          <span className="text-muted" style={{ fontSize: '12px' }}>Aucune action</span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {reservations.map((res) => (
+                  <AdminReservationRow
+                    key={res.id}
+                    res={res}
+                    onValidate={handleValidate}
+                    onCancel={handleCancel}
+                  />
+                ))}
               </tbody>
             </table>
           )}
