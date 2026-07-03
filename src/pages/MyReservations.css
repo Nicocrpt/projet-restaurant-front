@@ -8,51 +8,7 @@
   /* Hérite du fond de page global crème #fffaf3 */
 }
 
-/* Bannière de la page avec fond d'écran sombre pour intégrer l'en-tête absolu */
-.reservations-banner {
-  position: relative;
-  padding: 160px 20px 80px; /* Padding haut augmenté pour décaler sous l'en-tête absolu */
-  text-align: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../assets/restaurant.jpg');
-  background-size: cover;
-  background-position: center;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.banner-tagline {
-  display: block;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #b08d57; /* Doré signature */
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.banner-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 3rem;
-  font-weight: 500;
-  color: #ffffff; /* Blanc pour lisibilité sur fond sombre */
-  margin-bottom: 10px;
-}
-
-.banner-subtitle {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #dddddd; /* Gris clair pour lisibilité */
-  max-width: 600px;
-  margin: 0 auto 15px;
-}
-
-.banner-action {
-  margin-top: 16px;
-}
+/* La bannière est gérée par le composant réutilisable <Banner /> (styles dans App.css) */
 
 /* Grille de contenu */
 .reservations-content {

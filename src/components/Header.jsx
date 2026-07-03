@@ -6,8 +6,8 @@ function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, isAdmin, user, logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async  () => {
+    await logout();
     navigate("/");
   };
 
@@ -24,6 +24,11 @@ function Header() {
           <Link to="/menu" className="nav-link">
             La Carte
           </Link>
+           {!isAuthenticated && (
+            <Link to="/login" className="nav-link">
+              Réserver une table
+            </Link>
+          )}
           {isAuthenticated && (
             <Link to="/my-reservations" className="nav-link">
               Mes Réservations

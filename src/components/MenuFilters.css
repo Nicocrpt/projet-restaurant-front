@@ -1,0 +1,107 @@
+.luxury-panel {
+  width: 270px;
+  position: sticky;
+  top: 20px;
+
+  background: #fbfaf7;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px;
+
+  font-family: Georgia, serif;
+}
+
+/* titres */
+.filter-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* blocs */
+.filter-block {
+  margin-bottom: 18px;
+}
+
+/* menu segmenté (très restaurant chic) */
+.segmented-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seg-item {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  font-size: 13px;
+  color: #444;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.seg-item:hover {
+  background: rgba(0,0,0,0.03);
+  color: #111;
+}
+
+.seg-item.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* budget header */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.price-display {
+  font-size: 14px;
+  color: #111;
+}
+
+/* slider luxe */
+.luxury-slider {
+  width: 100%;
+  accent-color: #111;
+  margin-top: 6px;
+}
+
+/* labels */
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #777;
+  margin-top: 6px;
+}
+
+/* reset bouton discret */
+.reset-luxury-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 8px;
+  border-radius: 10px;
+
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-luxury-btn:hover {
+  background: #111;
+  color: #fff;
+}
