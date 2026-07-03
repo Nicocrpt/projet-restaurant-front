@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import AdminReservationRow from '../components/AdminReservationRow.jsx';
 import './ReservationsAdmin.css';
+import Banner from '../components/Banner.jsx';
 
 function ReservationsAdmin() {
   const navigate = useNavigate();
