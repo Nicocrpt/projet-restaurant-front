@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReservationCard from '../components/ReservationCard.jsx';
 import EditReservationModal from '../components/EditReservationModal.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 import './MyReservations.css';
 
 function MyReservations() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedReservation, setSelectedReservation] = useState(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const token = localStorage.getItem('token');
 
@@ -115,19 +123,8 @@ function MyReservations() {
     );
   };
 
-  if (!token) {
-    return (
-      <div className="reservations-page placeholder-page">
-        <h2>Mes Réservations</h2>
-        <div className="login-required-card">
-          <p>Vous devez être connecté pour consulter et gérer vos réservations.</p>
-          <div style={{ marginTop: '24px', display: 'flex', gap: '12px', justifyContent: 'center' }}>
-            <Link to="/login" className="btn btn-primary">Se Connecter</Link>
-            <Link to="/signup" className="btn btn-outline">Créer un Compte</Link>
-          </div>
-        </div>
-      </div>
-    );
+  if (!isAuthenticated) {
+    return null;
   }
 
   return (
